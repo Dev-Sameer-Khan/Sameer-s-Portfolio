@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: regular;
+  src: url(./assets/fonts/gilroy/Gilroy-Regular.ttf);
+}
+@font-face {
+  font-family: medium;
+  src: url(./assets/fonts/gilroy/Gilroy-Medium.ttf);
+}
+@font-face {
+  font-family: semibold;
+  src: url(./assets/fonts/gilroy/Gilroy-SemiBold.ttf);
+}
+@font-face {
+  font-family: bold;
+  src: url(./assets/fonts/gilroy/Gilroy-Bold.ttf);
+}
+
+* {
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #0c0c0d; /* Background of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b5b5b5; /* Color of the scrollbar thumb */
+  border-radius: 5px; /* Rounded corners for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0; /* Color of the thumb on hover */
+}
+
+.shiny-text {
+  color: #b5b5b5a4; /* Adjust this color to change intensity/style */
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0) 60%
+  );
+
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 7s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
