@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
 
 const testimonials = [
   {
@@ -28,14 +31,42 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
+
+  useGSAP(() => {
+    const title = SplitText.create(".eaight", { type: "chars" });
+
+
+    gsap.fromTo(
+      title.chars,
+      {
+        y: 100,
+        opacity: 0,
+        blur: "100px"
+      },
+      {
+        opacity: 1,
+        y: 0,
+        blur: "0px",
+        stagger: 0.005,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".eaight",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        }
+      }
+    );
+
+  }, []);
+
   return (
     <div className="bg-[#0C0C0D] w-full min-h-[80%] text-zinc-200 py-20 px-10 max-[640px]:px-4 text-center relative select-none">
       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[20vw] h-[70%] bg-gradient-to-r from-[#0C0C0D] to-transparent pointer-events-none z-20" />
       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[20vw] h-[70%] bg-gradient-to-l from-[#0C0C0D] to-transparent pointer-events-none z-20" />
-      <h2 className="text-4xl font-[bold] shiny-text">
+      <h2 className="text-4xl font-[bold] shiny-text eaight will-change-transform">
         Here's what others are saying 💬✨
       </h2>
-      <p className="text-zinc-400 mt-2 shiny-text">
+      <p className="text-zinc-400 mt-2 shiny-text eaight will-change-transform">
         They think Sameer is cool, maybe you will too!
       </p>
 

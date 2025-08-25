@@ -10,6 +10,11 @@ import {
   FaInstagram,
 } from "react-icons/fa";
 import { useForm, ValidationError } from "@formspree/react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
+
+gsap.registerPlugin(SplitText);
 
 const Contact = () => {
   const sectionRef = useRef();
@@ -64,6 +69,75 @@ const Contact = () => {
     );
   }
 
+  useGSAP(() => {
+    const title = SplitText.create(".nine", { type: "chars" });
+
+
+    gsap.fromTo(
+      title.chars,
+      {
+        y: 100,
+        opacity: 0,
+        blur: "100px"
+      },
+      {
+        opacity: 1,
+        y: 0,
+        blur: "0px",
+        stagger: 0.005,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".nine",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        }
+      }
+    );
+
+    gsap.fromTo(
+      ".left",
+      {
+        x: -100,
+        opacity: 0,
+        blur: "100px"
+      },
+      {
+        opacity: 1,
+        x: 0,
+        blur: "0px",
+        stagger: 0.001,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".left",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        }
+      }
+    );
+
+    gsap.fromTo(
+      ".right",
+      {
+        x: 100,
+        opacity: 0,
+        blur: "100px"
+      },
+      {
+        opacity: 1,
+        x: 0,
+        blur: "0px",
+        stagger: 0.001,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".right",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        }
+      }
+    );
+
+  }, []);
+
   return (
     <section
       ref={sectionRef}
@@ -78,10 +152,10 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl max-[640px]:text-4xl font-[bold] shiny-text">
+          <h2 className="text-5xl max-[640px]:text-4xl font-[bold] shiny-text nine will-change-transform">
             🚀 Let&apos;s Create Something Amazing! ✨🔥
           </h2>
-          <p className="text-xl mt-4 shiny-text">
+          <p className="text-xl mt-4 shiny-text nine will-change-transform">
             Your vision, our code - let&apos;s build the future together
           </p>
         </motion.div>
@@ -91,7 +165,7 @@ const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="glass-container backdrop-blur-3xl rounded-3xl border border-white/10 p-8 shadow-2xl flex-1"
+            className="glass-container left backdrop-blur-3xl rounded-3xl border border-white/10 p-8 shadow-2xl flex-1"
           >
             <form className="space-y-8" onSubmit={handleSubmit}>
               <div className="floating-input-group">
@@ -161,7 +235,7 @@ const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="space-y-8 flex-1"
+            className="space-y-8 flex-1 right"
           >
             <div className="glass-container backdrop-blur-3xl rounded-3xl border border-white/10 p-8 h-full shadow-2xl">
               <div className="space-y-10">

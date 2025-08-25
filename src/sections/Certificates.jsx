@@ -5,6 +5,11 @@ import {
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import { FaCertificate, FaTrophy } from "react-icons/fa";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
+
+gsap.registerPlugin(SplitText);
 
 const certificates = [
   {
@@ -73,9 +78,38 @@ const certificates = [
 ];
 
 const Certificates = () => {
+
+  
+  useGSAP(() => {
+    const title = SplitText.create(".six", { type: "chars" });
+
+
+    gsap.fromTo(
+      title.chars,
+      {
+        y: 100,
+        opacity: 0,
+        blur: "100px"
+      },
+      {
+        opacity: 1,
+        y: 0,
+        blur: "0px",
+        stagger: 0.005,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".six",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        }
+      }
+    );
+
+  }, []);
+
   return (
     <div className="bg-[#0C0C0D] text-zinc-200 font-[bold] px-10 max-[640px]:px-4 py-30 max-[640px]:py-0">
-      <h2 className="text-5xl text-center max-[640px]:text-4xl font-[bold] pl-10 max-[640px]:pl-0 mb-10 shiny-text">
+      <h2 className="text-5xl six will-change-transform text-center max-[640px]:text-4xl font-[bold] pl-10 max-[640px]:pl-0 mb-10 shiny-text">
         🏅 Certificates & Achievements 🎯
       </h2>
       <VerticalTimeline>

@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import CircularGallery from "../components/skillsComponents/CircularGallery";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
+
+gsap.registerPlugin(SplitText);
 
 const Skills = () => {
   const [isMobile, setisMobile] = useState(window.innerWidth < 640);
@@ -10,9 +15,36 @@ const Skills = () => {
 
   window.addEventListener("resize", handleResize);
 
+  useGSAP(() => {
+    const title = SplitText.create(".five", { type: "chars" });
+
+
+    gsap.fromTo(
+      title.chars,
+      {
+        y: 100,
+        opacity: 0,
+        blur: "100px"
+      },
+      {
+        opacity: 1,
+        y: 0,
+        blur: "0px",
+        stagger: 0.005,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".five",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        }
+      }
+    );
+
+  }, []);
+
   return (
     <div className="w-full h-screen bg-[#0C0C0D] relative pt-20 max-[640px]:pt-[20%]">
-      <div className="text text-center pb-20 font-[bold] text-zinc-200 text-5xl shiny-text leading-tight">
+      <div className="text text-center pb-20 font-[bold] text-zinc-200 text-5xl shiny-text leading-tight five will-change-transform">
         <h1>My Skillset⚡</h1>
       </div>
       <div className="absolute top-[30%] max-[640px]:top-[20%] right-36 max-[640px]:-right-20">

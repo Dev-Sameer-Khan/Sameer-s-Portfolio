@@ -3,6 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import gsap from "gsap";
 import React, { useEffect } from "react";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -117,9 +118,36 @@ const Works = () => {
   }, []);
 
 
+  useGSAP(() => {
+    const title = SplitText.create(".seven", { type: "chars" });
+
+
+    gsap.fromTo(
+      title.chars,
+      {
+        y: 100,
+        opacity: 0,
+        blur: "100px"
+      },
+      {
+        opacity: 1,
+        y: 0,
+        blur: "0px",
+        stagger: 0.005,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".seven",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        }
+      }
+    );
+
+  }, []);
+
   return (
     <>
-          <h2 className="text-center text-5xl font-[bold] text-gray-100 z-10 shiny-text mb-10 max-[599px]:mt-10">
+          <h2 className="text-center seven will-change-transform text-5xl font-[bold] text-gray-100 z-10 shiny-text mb-10 max-[599px]:mt-10">
         Selected Works 🚀
       </h2>
       {works.map((work, idx) => (
