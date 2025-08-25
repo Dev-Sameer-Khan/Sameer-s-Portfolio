@@ -1,4 +1,4 @@
-import react, { useEffect, useRef, useState } from "react";
+import  { useEffect, useState } from "react";
 import Hero from "./sections/Hero";
 import Background from "./components/heroComponents/Background";
 import Navbar from "./components/Navbar";
@@ -12,6 +12,7 @@ import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import Certificates from "./sections/Certificates";
 import About from "./sections/About";
+import Works from "./sections/Works";
 
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -33,13 +34,14 @@ const App = () => {
           <About />
           <Skills />
           <Certificates />
-          <Projects />
+          {/* <Projects /> */}
+          <Works/>
           <Testimonials />
           <Contact />
           <ScrollVelocity
             texts={["Sameer Khan", "Three Js Developer"]}
             velocity={100}
-            className="custom-scroll-text bg-[#0C0C0D] text-zinc-200 font-[bold] select-none"
+            className="custom-scroll-text will-change-transform bg-[#0C0C0D] text-zinc-200 font-[bold] select-none"
           />
           <Footer />
         </div>

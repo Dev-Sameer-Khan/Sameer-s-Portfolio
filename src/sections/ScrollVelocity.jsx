@@ -114,7 +114,7 @@ export const ScrollVelocity = ({
 
     return (
       <div
-        className={`${parallaxClassName} relative overflow-hidden`}
+        className={`${parallaxClassName} relative overflow-hidden will-change-transform`}
         style={parallaxStyle}
       >
         <motion.div

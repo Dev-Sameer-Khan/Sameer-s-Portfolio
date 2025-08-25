@@ -9,10 +9,14 @@ import {
   FaWhatsapp,
   FaInstagram,
 } from "react-icons/fa";
+import { useForm, ValidationError } from "@formspree/react";
 
-const Contact = () => {;
-
+const Contact = () => {
   const sectionRef = useRef();
+
+  // Remove local state for form fields, let Formspree handle form data
+  const [state, handleSubmit] = useForm("xqadzjbk"); // Use only the form key, not the full URL
+
   const socialLinks = [
     {
       icon: <FaEnvelope />,
@@ -41,11 +45,24 @@ const Contact = () => {;
     },
     {
       icon: <FaTwitter />,
-      url: "https://twitter.com/abhisekh_tw",
+      url: "https://x.com/Sameer_8teen",
       color: "#1DA1F2",
     },
   ];
 
+  if (state.succeeded) {
+    return (
+      <section
+        ref={sectionRef}
+        className="relative bg-[#0C0C0D] text-white min-h-screen w-full flex flex-col items-center justify-center px-10 max-[640px]:px-6 py-20 overflow-hidden"
+      >
+        <div className="text-center">
+          <h2 className="text-4xl font-bold mb-4">Thank you!</h2>
+          <p className="text-xl">Your message has been sent. I&apos;ll get back to you soon.</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
@@ -62,10 +79,10 @@ const Contact = () => {;
           className="text-center mb-16"
         >
           <h2 className="text-5xl max-[640px]:text-4xl font-[bold] shiny-text">
-            🚀 Let's Create Something Amazing! ✨🔥
+            🚀 Let&apos;s Create Something Amazing! ✨🔥
           </h2>
           <p className="text-xl mt-4 shiny-text">
-            Your vision, our code - let's build the future together
+            Your vision, our code - let&apos;s build the future together
           </p>
         </motion.div>
 
@@ -76,29 +93,37 @@ const Contact = () => {;
             transition={{ delay: 0.2 }}
             className="glass-container backdrop-blur-3xl rounded-3xl border border-white/10 p-8 shadow-2xl flex-1"
           >
-            <form className="space-y-8" onSubmit={(e) => Handle_Submit(e)}>
+            <form className="space-y-8" onSubmit={handleSubmit}>
               <div className="floating-input-group">
                 <input
                   type="text"
-                  onInput={(e) => setName(e.target.value)}
+                  name="name"
                   className="w-full p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl focus:outline-none transition-all"
                   placeholder="Your Name ✍️"
+                  required
                 />
               </div>
 
               <div className="floating-input-group">
                 <input
                   type="email"
-                  onInput={(e) => setEmail(e.target.value)}
+                  name="email"
                   className="w-full p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl focus:outline-none transition-all"
                   placeholder="Email 📧"
+                  required
+                />
+                <ValidationError
+                  prefix="Email"
+                  field="email"
+                  errors={state.errors}
                 />
               </div>
 
               <div className="floating-input-group Mobile">
                 <input
-                  onInput={(e) => setPhone(Number(e.target.value))}
+                  name="phone"
                   type="text"
+                  pattern="^[0-9+ ]*$"
                   className="w-full p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl focus:outline-none transition-all"
                   placeholder="Your Phone Number  📞"
                 />
@@ -106,20 +131,28 @@ const Contact = () => {;
 
               <div className="floating-input-group">
                 <textarea
-                  onInput={(e) => setMessage(e.target.value)}
+                  name="message"
                   rows="4"
                   className="w-full p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl focus:outline-none transition-all"
                   placeholder="Message 💬"
+                  required
+                />
+                <ValidationError
+                  prefix="Message"
+                  field="message"
+                  errors={state.errors}
                 />
               </div>
 
               <motion.button
+                type="submit"
+                disabled={state.submitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="w-full bg-gradient-to-r from-[#1a1a1a] to-[#2d2d2d] hover:from-[#2d2d2d] hover:to-[#1a1a1a] p-4 rounded-xl text-lg font-bold flex items-center justify-center gap-3 transition-all"
               >
                 <span className="text-xl">🚀</span>
-                Launch Message
+                {state.submitting ? "Sending..." : "Launch Message"}
               </motion.button>
             </form>
           </motion.div>
@@ -172,13 +205,13 @@ const Contact = () => {;
                 </div>
 
                 <a
-                  href="https://drive.google.com/file/d/18bQ-B11rof8Srwl3SZpEAkLGSA1N0ZSk/view?usp=drive_link"
+                  href="https://drive.google.com/file/d/1O_cy1mXhSkjfb__G2ocCc22E3pOc6u7O/view?usp=sharing"
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <motion.button
                     whileHover={{ y: -3 }}
                     className="w-full bg-white/5 hover:bg-white/20 p-4 rounded-xl flex items-center justify-center gap-3 text-lg font-bold transition-colors cursor-pointer"
-                    download="https://drive.google.com/file/d/18bQ-B11rof8Srwl3SZpEAkLGSA1N0ZSk/view?usp=drive_link"
                   >
                     <FaDownload className="text-xl" />
                     Get My Blueprint

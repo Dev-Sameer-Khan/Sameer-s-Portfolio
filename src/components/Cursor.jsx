@@ -1,34 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { gsap } from "gsap";
+
+// Cursor.jsx
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 const Cursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const outerRef = useRef(null);
+  const innerRef = useRef(null);
 
   useEffect(() => {
-    const handleMouseMove = (event) => {
-      setPosition({ x: event.clientX, y: event.clientY });
-      gsap.to(".custom-cursor", {
-        duration: 1.3,
-        x: event.clientX - 5,
-        y: event.clientY - 3,
-        ease: "power3.out",
+    const moveCursor = (e) => {
+      const { clientX, clientY } = e;
+
+      // Inner circle: instant
+      gsap.set(innerRef.current, {
+        x: clientX - 6,
+        y: clientY - 6,
+      });
+
+      // Outer circle: smooth
+      gsap.to(outerRef.current, {
+        duration: 0.2,
+        x: clientX - 16,
+        y: clientY - 16,
+        ease: "power2.out",
       });
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
+    window.addEventListener("mousemove", moveCursor);
+    return () => window.removeEventListener("mousemove", moveCursor);
   }, []);
 
   return (
-    <div
-      className="custom-cursor fixed z-[99999] w-3 h-3 bg-[#e4e4e7] rounded-full pointer-events-none mix-blend-difference max-[999px]:hidden"
-      style={{
-        opacity: 0.7,
-      }}
-    />
+    <div className="max-[1025px]:hidden">
+      {/* Outer Circle */}
+      <div
+        ref={outerRef}
+        className="fixed top-0 left-0 w-8 h-8 border border-white rounded-full z-[1000] pointer-events-none mix-blend-difference"
+      ></div>
+
+      {/* Inner Circle */}
+      <div
+        ref={innerRef}
+        className="fixed top-0 left-0 w-3 h-3 bg-white rounded-full z-[1000] pointer-events-none mix-blend-difference"
+      ></div>
+    </div>
   );
 };
 

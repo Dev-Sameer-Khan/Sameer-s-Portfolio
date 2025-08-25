@@ -72,7 +72,7 @@ const Navbar = () => {
               url: "https://www.instagram.com/abhishek_gupta.ig/",
             },
             {
-              name: "Linked In",
+              name: "LinkedIn",
               url: "https://www.linkedin.com/in/abhishek-gupta-545aa2260/",
             },
             {
@@ -135,7 +135,7 @@ const Navbar = () => {
               url: "https://www.instagram.com/dev.sameerkhan/",
             },
             {
-              name: "Linked In /",
+              name: "LinkedIn /",
               url: "https://www.linkedin.com/in/dev-sameer-khan/",
             },
             {

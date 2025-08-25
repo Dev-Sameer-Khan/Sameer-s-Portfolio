@@ -1,18 +1,96 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(SplitText, ScrollTrigger);
+
 
 const AboutMe = () => {
+
+  useGSAP(() => {
+    const title = SplitText.create(".three", { type: "chars" });
+    const desc = SplitText.create(".four", { type: "chars" });
+
+
+    gsap.fromTo(
+      title.chars,
+      {
+        y: 100,
+        opacity: 0,
+        blur: "100px"
+      },
+      {
+        opacity: 1,
+        y: 0,
+        blur: "0px",
+        stagger: 0.005,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".three",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        }
+      }
+    );
+
+    gsap.fromTo(
+      desc.chars,
+      {
+        y: 100,
+        opacity: 0,
+        blur: "100px"
+      },
+      {
+        opacity: 1,
+        y: 0,
+        blur: "0px",
+        stagger: 0.001,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".four",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        }
+      }
+    );
+
+    gsap.fromTo(
+      ".img-anim",
+      {
+        y: 100,
+        opacity: 0,
+        blur: "100px"
+      },
+      {
+        opacity: 1,
+        y: 0,
+        blur: "0px",
+        stagger: 0.001,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".img-anim",
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        }
+      }
+    );
+
+  }, []);
+
   return (
     <section className="relative w-full min-h-screen bg-[#0C0C0D] text-zinc-200 flex items-center justify-center px-20 max-[640px]:px-6 overflow-hidden">
-      <div className="flex flex-col lg:flex-row gap-16 max-w-7xl mx-auto relative z-10 w-full">
+      <div className="flex flex-col lg:flex-row max-[1025px]:gap-16 max-w-7xl mx-auto relative z-10 w-full">
         <div className="space-y-8 relative flex-1 lg:w-1/2">
-          <h2 className="text-5xl shiny-text xl:text-6xl font-bold leading-tight overflow-hidden bg-gradient-to-r from-[#1a1a1a] to-[#2d2d2d] bg-clip-text text-transparent">
+          <h2 className="three will-change-transform text-5xl shiny-text xl:text-6xl font-bold leading-tight overflow-hidden bg-gradient-to-r from-[#1a1a1a] to-[#2d2d2d] bg-clip-text text-transparent">
             {`Hey, I'm `.split(" ").map((word, i) => (
               <span key={i} className="word inline-block mr-3">
                 {word}
               </span>
             ))}
-            <span className="word inline-block">Sameer</span>
+            <span className="word inline-block">Sameer</span> {" "}
             <span className="word inline-block">Khan</span>
             <motion.span
               className="word inline-block ml-3"
@@ -23,7 +101,7 @@ const AboutMe = () => {
             </motion.span>
           </h2>
 
-          <div className="space-y-4">
+          <div className="space-y-4 four will-change-transform">
             <p className="text-xl text-zinc-300 leading-relaxed">
               I don’t just code,{" "}
               <span className="font-semibold border-b-2 border-zinc-600 hover:border-zinc-400 transition-colors shiny-text">
@@ -73,14 +151,14 @@ const AboutMe = () => {
           </div>
         </div>
 
-        <div className="relative flex items-center justify-center flex-1 lg:w-1/2">
-          <div className="w-full max-w-[400px] h-[500px] relative group">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#222] to-[#111] rounded-3xl transform rotate-2 scale-105 group-hover:rotate-0 transition-all duration-500" />
+        <div className="relative flex items-center justify-end max-[1025px]:justify-center flex-1 lg:w-1/2">
+          <div className="w-full max-w-[400px] h-[500px] relative group img-anim will-change-transform">
+            <div className="absolute rotates inset-0 bg-gradient-to-br from-[#222] to-[#111] rounded-3xl transform rotate-2 scale-105 group-hover:rotate-0 transition-all duration-500" />
             <div className="absolute inset-0 bg-[#0C0C0D] rounded-3xl overflow-hidden shadow-2xl">
               <img
                 src="https://res.cloudinary.com/dbgzq41x2/image/upload/v1742118677/sam2_v6lmy9.jpg"
                 alt="Sameer Khan"
-                className="w-full grayscale h-full object-cover object-top transform scale-125 group-hover:scale-[130%] transition-transform duration-500"
+                className="w-full img-scale grayscale h-full object-cover object-top transform scale-125 group-hover:scale-[130%] transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0D]/90 via-transparent to-transparent" />
             </div>
