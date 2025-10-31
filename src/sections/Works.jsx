@@ -30,6 +30,14 @@ const works = [
     year: "2025"
   },
   {
+    name: "Redefine Gaming",
+    link: "https://redefinegaming2.netlify.app/",
+    img: "https://res.cloudinary.com/dbgzq41x2/image/upload/v1761914960/redefine_dlxfym.webp",
+    category: "Gaming Website",
+    year: "2025"
+  },
+
+  {
     name: "Senova AI",
     link: "https://www.senova.in/",
     img: "https://res.cloudinary.com/dbgzq41x2/image/upload/v1761912504/Screenshot_from_2025-10-31_17-35-22_e3puxk.png",
