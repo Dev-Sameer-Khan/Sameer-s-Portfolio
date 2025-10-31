@@ -23,6 +23,20 @@ const works = [
     year: "2025"
   },
   {
+    name: "Addidas 3d Experience",
+    link: "https://awwwards-adidas.vercel.app/",
+    img: "https://res.cloudinary.com/dbgzq41x2/image/upload/v1761912505/Screenshot_from_2025-10-31_17-32-50_rpihsp.png",
+    category: "3d Experience",
+    year: "2025"
+  },
+  {
+    name: "Senova AI",
+    link: "https://www.senova.in/",
+    img: "https://res.cloudinary.com/dbgzq41x2/image/upload/v1761912504/Screenshot_from_2025-10-31_17-35-22_e3puxk.png",
+    category: "AI Product",
+    year: "2025"
+  },
+  {
     name: "Growess Group",
     link: "https://growess.vercel.app/",
     img: "https://res.cloudinary.com/dq6btiqs0/image/upload/v1749031239/mission_rjersu.png",
