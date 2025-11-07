@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Allow: /
+
+Sitemap: https://www.khansameer.me/sitemap.xml
